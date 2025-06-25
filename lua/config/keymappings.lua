@@ -1,8 +1,8 @@
 local wk = require('which-key')
 
 -- ToggleTerm Key Mappings
-vim.keymap.set('i', [[<C-\>]], '<cmd>exe v:count1 . "ToggleTerm size=80 direction=vertical"<CR>')
-vim.keymap.set('n', [[<C-\>]], '<cmd>exe v:count1 . "ToggleTerm size=80 direction=vertical"<CR>')
+vim.keymap.set('i', [[<C-\>]], '<cmd>exe v:count1 . "ToggleTerm size=70 direction=vertical"<CR>')
+vim.keymap.set('n', [[<C-\>]], '<cmd>exe v:count1 . "ToggleTerm size=70 direction=vertical"<CR>')
 
 function _G.set_terminal_keymaps()
     local opts = { noremap = true }
@@ -19,6 +19,22 @@ wk.add({
     { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers", mode = "n" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags", mode = "n" },
+})
+
+-- Git keymappings
+local gitsigns = require("gitsigns")
+wk.add({
+    { "<leader>g", group = "git" },
+    { "<leader>gc", "<cmd>Neogit kind=vsplit<cr>", desc = "Commit", mode = "n" },
+    { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "Open Diffview", mode = "n" },
+    { "<leader>gf", "<cmd>DiffviewClose<cr>", desc = "Close Diffview", mode = "n" },
+    { "<leader>gs", function() gitsigns.stage_hunk() end, desc = "Stage Hunk", mode = "n" },
+    { "<leader>gu", function() gitsigns.undo_stage_hunk() end, desc = "Unstage Hunk", mode = "n" },
+    { "<leader>gr", function() gitsigns.reset_hunk() end, desc = "Reset Hunk", mode = "n" },
+    { "<leader>gp", function() gitsigns.preview_hunk() end, desc = "Preview Hunk", mode = "n" },
+    { "<leader>gb", function() gitsigns.blame_line() end, desc = "Blame Line", mode = "n" },
+    --{ "<leader>gf", function() gitsigns.diffthis('~1') end, desc = "Diff This", mode = "n" },
+    { "<leader>gn", function() gitsigns.next_hunk() end, desc = "Next Hunk", mode = "n" },
 })
 
 -- Flash keymappings
@@ -77,8 +93,8 @@ wk.add({
 -- Other keymappings
 wk.add({
     { "<leader>t", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Explorer", mode = "n" },
-    { "<leader>g", "<cmd>Neogit kind=vsplit<cr>", desc = "Git", mode = "n" },
     { "<leader>u", function() vim.cmd.UndotreeToggle() end, desc = "Toggle Undo Tree", mode = "n" },
-    --{ "<A-d>", "<cmd>Lspsaga term_toggle<cr>", desc = "Toggle Terminal", mode = { "n", "t" } },
     { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover Documentation", mode = "n" },
 })
+
+
