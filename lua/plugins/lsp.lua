@@ -25,7 +25,13 @@ return {
         'nvimdev/lspsaga.nvim',
         config = function()
             vim.diagnostic.config({ virtual_text = true })
-            require('lspsaga').setup()
+            require('lspsaga').setup({
+                finder = {
+                    keys = {
+                        vsplit = "v"
+                    }
+                }
+            })
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter', -- optional
