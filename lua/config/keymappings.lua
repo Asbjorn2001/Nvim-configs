@@ -23,10 +23,10 @@ wk.add({
     { "<leader>f", group = "File Navigation" },
     { "<leader>fe", "<cmd>NvimTreeToggle<cr>", desc = "File Explorer", mode = "n" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files", mode = "n" },
-    { "<leader>fs", "<cmd>Telescope live_grep<cr>", desc = "Live Search", mode = "n" },
-    { "<leader>fg", "<cmd>Telescope git_files<cr>", desc = "Find Git Files", mode = "n" },
+    { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep", mode = "n" },
+    { "<leader>ft", "<cmd>Telescope git_files<cr>", desc = "Find Tracked Git Files", mode = "n" },
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Buffers", mode = "n" },
-    { "<leader>fh", "<cmd>Telescope harpoon marks<cr>", desc = "Find Harpoon File", mode = "n" }
+    { "<leader>fh", "<cmd>Telescope harpoon marks<cr>", desc = "Find Harpooned Files", mode = "n" }
     -- { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags", mode = "n" },
 })
 
@@ -35,7 +35,7 @@ local ui = require("harpoon.ui")
 
 -- Harpoon keymappings
 wk.add({
-    { "<leader>a", function() mark.add_file() end, desc = "Harpoon Add File", mode = "n" },
+    { "<leader>a", function() mark.add_file() end, desc = "Add File To Harpoon", mode = "n" },
     { "<C-h>", function() ui.toggle_quick_menu() end, desc = "Harpoon Menu", mode = "n" },
     { "<C-n>", function() ui.nav_next() end, desc = "Harpoon Next", mode = "n" },
     { "<C-p", function() ui.nav_prev() end, desc = "Harpoon Prev", mode = "n" },
@@ -94,24 +94,44 @@ wk.add({
 
 -- Diagnostics
 wk.add({
-    { "<leader>d", group = "Diagnostics" },
-    { "<leader>dw", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "Show Workspace Diagnostics", mode = "n" },
-    { "<leader>df", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "Show Buffer Diagnostics", mode = "n" },
-    { "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Show Line Diagnostics", mode = "n" },
-    { "<leader>dn", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Jump to the next diagnostic", mode = "n" },
-    { "<leader>dp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Jump to the previous diagnostic", mode = "n" },
+    { "<leader>v", group = "View Diagnostics" },
+    { "<leader>vw", "<cmd>Lspsaga show_workspace_diagnostics<cr>", desc = "Workspace Diagnostics", mode = "n" },
+    { "<leader>vb", "<cmd>Lspsaga show_buf_diagnostics<cr>", desc = "Buffer Diagnostics", mode = "n" },
+    { "<leader>vl", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Line Diagnostics", mode = "n" },
+    { "<leader>vn", "<cmd>Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic", mode = "n" },
+    { "<leader>vp", "<cmd>Lspsaga diagnostic_jump_prev<cr>", desc = "Previous Diagnostic", mode = "n" },
+})
+
+-- DAP
+local dap, dapui = require("dap"), require("dapui")
+wk.add({
+    { "<leader>d", group = "Debugger" },
+    { "<leader>dt", dapui.toggle, desc = "Toggle UI", mode = "n" },
+    { "<leader>do", function() dapui.open({ reset = true }) end, desc = "Open UI (Reset)", mode = "n" },
+    { "<leader>db", dap.toggle_breakpoint, desc = "Toggle Breakpoint", mode = "n" },
+    { "<leader>dB", function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Set Conditional Breakpoint", mode = "n" },
+    { "<leader>dx", dap.clear_breakpoints, desc = "Remove Breakpoints", mode = "n" },
+    { "<leader>dc", dap.continue, desc = "Continue/start Debugger", mode = "n" },
+    { "<leader>d?", function() dapui.eval(nil, { enter = true }) end, desc = "Evaluate Expression", mode = "n" },
+    { "<Up>", dap.step_into, mode = "n" },
+    { "<Right>", dap.step_over, mode = "n" },
+    { "<Down>", dap.step_out, mode = "n" },
+    { "<Left>", dap.step_back, mode = "n" },
 })
 
 -- Other keymappings
 wk.add({
     { "<leader>p", '"_dP', desc = "Super Paste", mode = "v", hidden = true }, -- Paste without overriding clipboard
     { "<leader>y", '"+y', desc = "Yank to Clipboard", mode = { "n", "v" }, hidden = true },
-    { "<leader>Y", '"+Y', desc = "Yank Line to Clipboard", mode = "n", hidden = true },
-    { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "Terminal", mode = "n" },
+    { "<leader>Y", '"+Y', desc = "Yank Line  Clipboard", mode = "n", hidden = true },
+    -- { "<leader>t", "<cmd>Lspsaga term_toggle<cr>", desc = "Terminal", mode = { "n", "t" } },
+    { "<A-d>", "<cmd>Lspsaga term_toggle<cr>", mode = { "n", "t" } },
     { "<leader>j", function() flash.jump() end, desc = "Jump Search", mode = "n" },
     { "<leader>n", group = "Notifications" },
     { "<leader>u", function() vim.cmd.UndotreeToggle() end, desc = "Undo Tree", mode = "n" },
     { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover Documentation", mode = "n" },
 })
+
+
 
 

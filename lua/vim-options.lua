@@ -23,15 +23,5 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- LSPs
-vim.lsp.enable("eslint-lsp")
-vim.lsp.enable("omnisharp")
-vim.lsp.config('rust_analyzer', {
-  settings = {
-    ['rust-analyzer'] = {
-      diagnostics = {
-        enable = true
-      }
-    }
-  }
-})
-
+vim.lsp.inlay_hint.enable(true, {0})
+vim.diagnostic.config({ virtual_text = true })

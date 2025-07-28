@@ -1,24 +1,28 @@
-return { 
-    "nvim-treesitter/nvim-treesitter", 
+return {
+    "nvim-treesitter/nvim-treesitter",
     branch = 'master',
     lazy = false,
     build = ":TSUpdate",
     config = function()
         require'nvim-treesitter.configs'.setup {
-            ensure_installed = { 
-                "lua", 
+            ensure_installed = {
+                "lua",
                 "vim",
                 "fish",
                 "regex",
                 "markdown",
                 "markdown_inline",
-                "bash", 
+                "bash",
                 "javascript",
                 "typescript",
-                "c", 
+                "c",
+                "cpp",
                 "rust",
                 "c_sharp",
-            }, 
+                "zig",
+                "python",
+                "go",
+            },
             sync_install = false,
             auto_install = true,
             highlight = { enable = true },

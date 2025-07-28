@@ -14,7 +14,10 @@ return {
     },
     {
         "mason-org/mason-lspconfig.nvim",
-        opts = {},
+        opts = {
+            ensure_installed = { "lua_ls", "rust_analyzer", "ts_ls", "jsonls", "omnisharp", "zls",
+                                 "clangd", "pyright", "ast_grep", "biome", "eslint", "gopls" }
+        },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
             "neovim/nvim-lspconfig",
@@ -24,13 +27,16 @@ return {
     {
         'nvimdev/lspsaga.nvim',
         config = function()
-            vim.diagnostic.config({ virtual_text = true })
             require('lspsaga').setup({
                 finder = {
                     keys = {
                         vsplit = "v"
                     }
-                }
+                },
+                lightbulb = {
+                    enable = true,
+                    sign = false,
+                },
             })
         end,
         dependencies = {
@@ -38,5 +44,4 @@ return {
             'nvim-tree/nvim-web-devicons',     -- optional
         }
     },
-    -- { "folke/neodev.nvim", opts = {} },
 }
