@@ -13,6 +13,22 @@ return {
         priority = 999,
     },
     {
+        "Mofiqul/dracula.nvim",
+        name = "dracula",
+        priority = 998,
+        opts = {},
+    },
+    { "rebelot/kanagawa.nvim" },
+    { "jacoborus/tender.vim" },
+    { "scottmckendry/cyberdream.nvim" },
+    { "AlexvZyl/nordic.nvim" },
+    { "vague-theme/vague.nvim" },
+    { "rmehri01/onenord.nvim" },
+    { "nordtheme/vim" },
+    { "wurli/cobalt.nvim" },
+    { "navarasu/onedark.nvim" },
+    { "Shatur/neovim-ayu" },
+    {
         'numToStr/Comment.nvim',
         opts = {
             -- add any options here
